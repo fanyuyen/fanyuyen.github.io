@@ -11,7 +11,7 @@ profile:
   address: >
     <p><i>All conditioned phenomena are like dreams, illusions, bubbles, shadows; Like dew and lightning. One should contemplate them in this way.</i> ── from Vajracchedika Prajnaparamita Sutra (Diamond Sutra)</p>
     <p style='text-align: center'><i>一切有為法，如夢幻泡影</i></p>
-    <p><i>如露亦如電，應作如是觀</i></p>
+    <p style='text-align: center'><i>如露亦如電，應作如是觀</i></p>
     <p style='text-align: right'>──《金剛經》</p>
 
 news: false  # includes a list of news items
