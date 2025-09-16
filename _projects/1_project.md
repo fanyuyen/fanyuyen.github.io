@@ -1,80 +1,54 @@
 ---
 layout: page
-title: project 1
-description: a project with a background image
+title: NNAR
+description: A augmented reality yool for real-time optode/electrode placement
 img: assets/img/12.jpg
 importance: 1
 category: work
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+**TL;DR**  
+NeuroNavigatAR (NNAR) is an open-source augmented reality tool that uses fast facial-landmark tracking and atlas registration to *predict and overlay* 10–20/10–10/10–5 head landmarks in real time. It improves consistency and speeds up fNIRS/EEG cap placement without needing digitizers or MRI.
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+---
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+## Why it matters
+- **Problem:** Longitudinal and group EEG/fNIRS studies suffer when caps aren’t placed consistently. Tape-measure workflows are slow and operator-dependent; prefab caps can shift; post-hoc digitizing doesn’t help *during* setup.  
+- **Goal:** Provide *real-time* visual guidance for placing probes/caps accurately and repeatably across sessions and subjects.
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
+---
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal its glory in the next row of images.
+## What NNAR does
+- Tracks **468 facial landmarks** per frame (MediaPipe) and estimates key cranial points (Nz, LPA, RPA, Iz, Cz) via a **pre-computed face→head mapping** learned from a **1,000+ subject** 3-D head library (LYHM).
+- Registers **atlas-derived 10–20/10–10/10–5** positions to the individual’s head in the camera stream and overlays them **live** (~15 FPS on a laptop).
+- Simple GUI to pick atlas (adult or age-matched), system density, and apply small manual offsets if needed.
 
+---
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
+## How it works (short version)
+   Detect facial landmarks → predict cranial landmarks → register atlas → render 10–20 overlays on the video feed.
 
+---
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+## Key results
+- **Speed:** ~15 FPS on a MacBook Air (M1).
+- **Accuracy (10–5 landmarks):**  
+  - Adult atlas (Colin27): **1.52 cm** median error  
+  - **Age-matched** atlases: **1.33 cm**  
+  - **Subject-specific head surface:** **0.75 cm** (lower bound)
+- **Cranial landmark prediction (linear model):** median errors ≈ **0.87–1.75 cm** (LPA, RPA best; Iz higher).  
+- **Consistency:** Stable across repeated sessions (no significant accuracy difference across adult age groups); repeatability demo on a human subject showed small tracking errors (e.g., FpZ ≈ **0.11–0.13 cm** vs. fiducials in two sessions).  
+- **Spatial pattern:** Forehead/anterior landmarks are most accurate; errors increase toward the posterior (limited camera view & hair occlusion).
 
-{% raw %}
-```html
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-```
-{% endraw %}
+---
+
+## Open source
+
+- **Code:** <https://github.com/COTILab/NeuroNavigatAR>  
+
+---
+
+## Citation
+Yen, F.-Y., Lin, Y.-A., & Fang, Q. *Improving neuroimaging headgear placement robustness using facial-landmark guided augmented reality.  
+**Keywords:** fNIRS, EEG, 10–20 system, augmented reality, computer vision, neuroimaging
+
